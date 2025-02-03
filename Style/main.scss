@@ -1,0 +1,133 @@
+$primary-blue: #0066cc;
+$secondary-blue: #0052a3;
+$light-blue: #e6f3ff;
+$sidebar-bg: #f8fafc;
+$border-color: #e2e8f0;
+$text-primary: #1a202c;
+$text-secondary: #4a5568;
+$white: #ffffff;
+
+$icons: (
+    "github": (rgb(114, 114, 114), $white),
+    "sass": (rgb(255, 0, 212), $white)
+);
+
+@mixin icon($name, $color, $bg) {
+    .fa-#{$name} {
+        color: $color;
+        border-radius: 50%;
+        padding: 15px 15px;
+        background: {
+            color: transparent;
+        };
+        font: {
+            size: 25px;
+        };
+        transition: 0.2s;
+
+        &:hover {
+            color: $bg;
+            background: {
+                color: $color;
+            };
+        }
+    }
+}
+
+@mixin card-shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+@mixin hover-transition {
+    transition: all 0.2s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: $text-primary;
+    background-color: $white;
+}
+
+.sidebar {
+    background-color: $sidebar-bg;
+    border-right: 1px solid $border-color;
+    padding: 1.5rem;
+    position: fixed;
+    width: 300px;
+    height: 100vh;
+    overflow-y: auto;
+
+    &-header {
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid $border-color;
+        margin-bottom: 1.5rem;
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: $primary-blue;
+        }
+    }
+}
+
+.nav-section {
+    margin-bottom: 2rem;
+
+    h4 {
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: $text-secondary;
+        margin-bottom: 0.75rem;
+    }
+
+    ul {
+        list-style: none;
+
+        li {
+            margin-bottom: 0.5rem;
+
+            a {
+                display: block;
+                padding: 0.5rem;
+                color: $text-secondary;
+                text-decoration: none;
+                border-radius: 4px;
+                @include hover-transition;
+
+                &:hover {
+                    background-color: $light-blue;
+                    color: $primary-blue;
+                }
+
+                &.active {
+                    background-color: $light-blue;
+                    color: $primary-blue;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}
+
+.resours {
+    display: flex;
+    gap: 20px;
+    text-align: center;
+    justify-content: center;
+    margin-top: 220%;
+
+    @each $name, $color in $icons {
+        @include icon($name, nth($color,1), nth($color, 2))
+    }
+}
+
+.content {
+    margin-left: 350px;
+}
